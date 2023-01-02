@@ -74,6 +74,13 @@ const Dashboard = ({ user, order }) => {
             <div className="stat-desc">21% more than last month</div>
           </div>
         </div>
+        <div className="stats shadow bg-primary text-white">
+          <div className="stat">
+            <div className="stat-title">Monthly User</div>
+            <div className="stat-value">{user.length}</div>
+            <div className="stat-desc">21% more than last month</div>
+          </div>
+        </div>
       </div>
       <div className="p-4">
         <div className="grid lg:grid-cols-2 gap-4 w-full">
@@ -82,7 +89,20 @@ const Dashboard = ({ user, order }) => {
               data={data}
               height="350px"
               width="350px"
-              options={{ maintainAspectRatio: false }}
+              options={{
+                maintainAspectRatio: false,
+
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "Gender distribution",
+                    color: "#fff",
+                    font: {
+                      size: 20,
+                    },
+                  },
+                },
+              }}
             />
           </div>
           <div>
@@ -90,7 +110,20 @@ const Dashboard = ({ user, order }) => {
               data={data2}
               height="350px"
               width="350px"
-              options={{ maintainAspectRatio: false }}
+              options={{
+                maintainAspectRatio: false,
+
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "Occupation distribution",
+                    color: "#fff",
+                    font: {
+                      size: 20,
+                    },
+                  },
+                },
+              }}
             />
           </div>
         </div>
