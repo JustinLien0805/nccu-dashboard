@@ -1,12 +1,13 @@
 import React from "react";
 import { prisma } from "../../../lib/prisma";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -15,20 +16,26 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
+  BarElement,
   LineElement,
   Title,
   Tooltip,
   Legend
 );
 const Order = ({ orders, countsByDate }) => {
-  // loop through the order data to get the total revenue
+  // loop through the order data to get the total revenue and get plans count
   let totalRevenue = 0;
-
+  const plans = {
+    mainDish: 0,
+    noMainDish: 0,
+  };
   orders.forEach((order) => {
     if (order.Dish_id === 2) {
       totalRevenue += 50;
+      plans.noMainDish++;
     } else {
       totalRevenue += 90;
+      plans.mainDish++;
     }
   });
 
@@ -40,28 +47,98 @@ const Order = ({ orders, countsByDate }) => {
         label: "Order",
         data: Object.values(countsByDate),
         fill: false,
-        backgroundColor: "#fff",
-        borderColor: "#fff",
+        backgroundColor: "#e879f999",
+        borderColor: "#e879f9",
       },
     ],
   };
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
+    plugins: {
+      title: {
+        display: true,
+        text: "Order per Day",
+        color: "#fff",
+        font: {
+          size: 20,
         },
-      ],
+      },
+    },
+    scales: {
+      y: {
+        // not 'yAxes: [{' anymore (not an array anymore)
+        ticks: {
+          color: "#fff", // not 'fontColor:' anymore
+          beginAtZero: true,
+        },
+      },
+      x: {
+        // not 'xAxes: [{' anymore (not an array anymore)
+        ticks: {
+          color: "#fff", // not 'fontColor:' anymore
+
+          beginAtZero: true,
+        },
+      },
+    },
+  };
+
+  const labels = ["Main Dish", "No Main Dish"];
+
+  const data2 = {
+    labels,
+    datasets: [
+      {
+        label: "Plans",
+        data: [plans.mainDish, plans.noMainDish],
+        backgroundColor: ["#2dd4bf", "#fbbf24"],
+      },
+    ],
+  };
+
+  const options2 = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Plans distribution",
+        color: "#fff",
+        font: {
+          size: 20,
+        },
+      },
+      labels: {
+        color: "#fff",
+      },
+    },
+    scales: {
+      y: {
+        // not 'yAxes: [{' anymore (not an array anymore)
+        ticks: {
+          color: "#fff", // not 'fontColor:' anymore
+          beginAtZero: true,
+        },
+      },
+      x: {
+        // not 'xAxes: [{' anymore (not an array anymore)
+        ticks: {
+          color: "#fff", // not 'fontColor:' anymore
+
+          beginAtZero: true,
+        },
+      },
     },
   };
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:py-20">
+      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:pt-20">
+        <h2 className="text-5xl font-bold col-span-3">Order Stats</h2>
         <div className="stats shadow bg-primary text-white">
           <div className="stat">
             <div className="stat-title">Total Order</div>
@@ -77,11 +154,13 @@ const Order = ({ orders, countsByDate }) => {
           </div>
         </div>
       </div>
-      <div className="p-4 max-w-lg">
-        <h2 className="font-bold text-3xl">Order Stats</h2>
-        <div className="grid gap-4 w-full">
-          <div>
-            <Line data={data} height="350px" width="350px" options={options} />
+      <div className="p-4">
+        <div className="grid gap-4">
+          <div className="md:w-[75vw] w-[80vw] h-[50vh]">
+            <Line data={data} options={options} />
+          </div>
+          <div className="md:w-[75vw] w-[80vw] h-[50vh]">
+            <Bar data={data2} options={options2} />
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ const Dashboard = ({ user, order }) => {
       {
         label: "Gender ratio",
         data: [genderCounts.male, genderCounts.female, genderCounts.other],
-        backgroundColor: ["#2dd4bf50", "#fbbf2450", "#f8717150"],
+        backgroundColor: ["#2dd4bf99", "#fbbf2499", "#f8717199"],
         borderColor: ["#2dd4bf", "#fbbf24", "#f87171"],
         borderWidth: 1,
       },
@@ -56,7 +56,7 @@ const Dashboard = ({ user, order }) => {
       {
         label: "Occupation ratio",
         data: [occupationCounts.student, occupationCounts.teacher],
-        backgroundColor: ["#e879f950", "#60a5fa50"],
+        backgroundColor: ["#e879f999", "#60a5fa99"],
         borderColor: ["#e879f9", "#60a5fa"],
         borderWidth: 1,
       },
@@ -65,7 +65,8 @@ const Dashboard = ({ user, order }) => {
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:py-20">
+      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:pt-20">
+        <h2 className="text-5xl font-bold col-span-3">User Stats</h2>
         <div className="stats shadow bg-primary text-white">
           <div className="stat">
             <div className="stat-title">Total User</div>
@@ -73,25 +74,8 @@ const Dashboard = ({ user, order }) => {
             <div className="stat-desc">21% more than last month</div>
           </div>
         </div>
-
-        <div className="stats shadow bg-primary text-white">
-          <div className="stat">
-            <div className="stat-title">Total Order</div>
-            <div className="stat-value">{order.length}</div>
-            <div className="stat-desc">21% more than last month</div>
-          </div>
-        </div>
-
-        <div className="stats shadow bg-primary text-white">
-          <div className="stat">
-            <div className="stat-title">Total Revenue</div>
-            <div className="stat-value">{order.length * 90}</div>
-            <div className="stat-desc">21% more than last month</div>
-          </div>
-        </div>
       </div>
       <div className="p-4">
-        <h2 className="font-bold text-3xl">User Stats</h2>
         <div className="grid lg:grid-cols-2 gap-4 w-full">
           <div>
             <Pie

@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { BiLogOut, BiCart } from "react-icons/bi";
-import { BsStar, BsCurrencyDollar } from "react-icons/bs";
+import { BiLogOut, BiCart, BiUser } from "react-icons/bi";
+import { BsStar } from "react-icons/bs";
 import { MdOutlineFastfood } from "react-icons/md";
 const Navbar = ({ children }) => {
   const router = useRouter();
@@ -64,6 +64,16 @@ const Navbar = ({ children }) => {
             <li>
               <a
                 onClick={() => {
+                  handlePush("/dashboard/");
+                }}
+              >
+                <BiUser />
+                User
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => {
                   handlePush("/dashboard/order");
                 }}
               >
@@ -91,16 +101,7 @@ const Navbar = ({ children }) => {
                 Rating
               </a>
             </li>
-            <li>
-              <a
-                onClick={() => {
-                  handlePush("/dashboard/revenue");
-                }}
-              >
-                <BsCurrencyDollar />
-                Revenue
-              </a>
-            </li>
+
             <li>
               <a
                 onClick={() => {
