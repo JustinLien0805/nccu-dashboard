@@ -12,6 +12,7 @@ const Navbar = ({ children }) => {
     if (user) {
       router.push(path);
     } else {
+      alert("Please login first");
       router.push("/");
     }
   };
@@ -40,7 +41,7 @@ const Navbar = ({ children }) => {
                 </svg>
               </label>
             </div>
-            <div className="flex-1 px-2 mx-2 lg:hidden font-bold text-xl">
+            <div className="flex-1 px-2 mx-2 lg:hidden font-bold text-xl text-accent">
               NCCU Dashboard
             </div>
           </div>
@@ -52,7 +53,7 @@ const Navbar = ({ children }) => {
             {/* <!-- Sidebar content here --> */}
             <li>
               <a
-                className="font-bold text-3xl"
+                className="font-bold text-3xl text-accent"
                 onClick={() => {
                   handlePush("/dashboard");
                 }}
@@ -61,24 +62,41 @@ const Navbar = ({ children }) => {
               </a>
             </li>
             <li>
-              <a>
+              <a
+                onClick={() => {
+                  handlePush("/dashboard/order");
+                }}
+              >
                 <BiCart />
-                Order</a>
+                Order
+              </a>
             </li>
             <li>
-              <a>
+              <a
+                onClick={() => {
+                  handlePush("/dashboard/dish");
+                }}
+              >
                 <MdOutlineFastfood />
                 Dish
               </a>
             </li>
             <li>
-              <a>
+              <a
+                onClick={() => {
+                  handlePush("/dashboard/rating");
+                }}
+              >
                 <BsStar />
                 Rating
               </a>
             </li>
             <li>
-              <a>
+              <a
+                onClick={() => {
+                  handlePush("/dashboard/revenue");
+                }}
+              >
                 <BsCurrencyDollar />
                 Revenue
               </a>
