@@ -59,7 +59,7 @@ const Order = ({ orders, countsByDate }) => {
       title: {
         display: true,
         text: "Order per Day",
-        color: "#fff",
+        color: "#a5adba",
         font: {
           size: 20,
         },
@@ -69,14 +69,14 @@ const Order = ({ orders, countsByDate }) => {
       y: {
         // not 'yAxes: [{' anymore (not an array anymore)
         ticks: {
-          color: "#fff", // not 'fontColor:' anymore
+          color: "#a5adba", // not 'fontColor:' anymore
           beginAtZero: true,
         },
       },
       x: {
         // not 'xAxes: [{' anymore (not an array anymore)
         ticks: {
-          color: "#fff", // not 'fontColor:' anymore
+          color: "#a5adba", // not 'fontColor:' anymore
 
           beginAtZero: true,
         },
@@ -92,7 +92,9 @@ const Order = ({ orders, countsByDate }) => {
       {
         label: "Plans",
         data: [plans.mainDish, plans.noMainDish],
-        backgroundColor: ["#2dd4bf", "#fbbf24"],
+        backgroundColor: ["#2dd4bf99", "#fbbf2499"],
+        borderColor: ["#2dd4bf", "#fbbf24"],
+        borderWidth: 1,
       },
     ],
   };
@@ -107,27 +109,27 @@ const Order = ({ orders, countsByDate }) => {
       title: {
         display: true,
         text: "Plans distribution",
-        color: "#fff",
+        color: "#a5adba",
         font: {
           size: 20,
         },
       },
       labels: {
-        color: "#fff",
+        color: "#a5adba",
       },
     },
     scales: {
       y: {
         // not 'yAxes: [{' anymore (not an array anymore)
         ticks: {
-          color: "#fff", // not 'fontColor:' anymore
+          color: "#a5adba", // not 'fontColor:' anymore
           beginAtZero: true,
         },
       },
       x: {
         // not 'xAxes: [{' anymore (not an array anymore)
         ticks: {
-          color: "#fff", // not 'fontColor:' anymore
+          color: "#a5adba", // not 'fontColor:' anymore
 
           beginAtZero: true,
         },
@@ -155,11 +157,11 @@ const Order = ({ orders, countsByDate }) => {
         </div>
       </div>
       <div className="p-4">
-        <div className="grid gap-4">
-          <div className="md:w-[75vw] w-[80vw] h-[50vh]">
+        <div className="flex justify-center flex-col items-center">
+          <div className="md:w-[60vw] w-[80vw] h-[50vh]">
             <Line data={data} options={options} />
           </div>
-          <div className="md:w-[75vw] w-[80vw] h-[50vh]">
+          <div className="md:w-[60vw] w-[80vw] h-[50vh]">
             <Bar data={data2} options={options2} />
           </div>
         </div>

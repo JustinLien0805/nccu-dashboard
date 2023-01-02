@@ -37,27 +37,27 @@ const Dish = ({ top3, records }) => {
       title: {
         display: true,
         text: "Order Distribution",
-        color: "#fff",
+        color: "#a5adba",
         font: {
           size: 20,
         },
       },
       labels: {
-        color: "#fff",
+        color: "#a5adba",
       },
     },
     scales: {
       y: {
         // not 'yAxes: [{' anymore (not an array anymore)
         ticks: {
-          color: "#fff", // not 'fontColor:' anymore
+          color: "#a5adba", // not 'fontColor:' anymore
           beginAtZero: true,
         },
       },
       x: {
         // not 'xAxes: [{' anymore (not an array anymore)
         ticks: {
-          color: "#fff", // not 'fontColor:' anymore
+          color: "#a5adba", // not 'fontColor:' anymore
 
           beginAtZero: true,
         },
@@ -89,7 +89,7 @@ const Dish = ({ top3, records }) => {
         </h2>
         <div className="stats shadow bg-primary text-white">
           <div className="stat">
-            <div className="stat-title">1st</div>
+            <div className="stat-title font-bold text-xl">1st</div>
             <div className="stat-value">{top3[0].name}</div>
             <div className="stat-desc">21% more than last month</div>
           </div>
@@ -97,7 +97,7 @@ const Dish = ({ top3, records }) => {
 
         <div className="stats shadow bg-primary text-white">
           <div className="stat">
-            <div className="stat-title">2nd</div>
+            <div className="stat-title font-bold text-xl">2nd</div>
             <div className="stat-value"> {top3[1].name}</div>
             <div className="stat-desc">21% more than last month</div>
           </div>
@@ -105,15 +105,15 @@ const Dish = ({ top3, records }) => {
 
         <div className="stats shadow bg-primary text-white">
           <div className="stat">
-            <div className="stat-title">3rd</div>
+            <div className="stat-title font-bold text-xl">3rd</div>
             <div className="stat-value">{top3[2].name}</div>
             <div className="stat-desc">21% more than last month</div>
           </div>
         </div>
       </div>
       <div className="p-4">
-        <div className="grid gap-4">
-          <div className="md:w-[75vw] w-[80vw] h-[50vh]">
+        <div className="flex justify-center">
+          <div className="md:w-[70vw] w-[80vw] h-[50vh]">
             <Bar data={data} options={options} />
           </div>
         </div>

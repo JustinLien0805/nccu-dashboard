@@ -96,7 +96,7 @@ const Dashboard = ({ user, order }) => {
                   title: {
                     display: true,
                     text: "Gender distribution",
-                    color: "#fff",
+                    color: "#a5adba",
                     font: {
                       size: 20,
                     },
@@ -117,7 +117,7 @@ const Dashboard = ({ user, order }) => {
                   title: {
                     display: true,
                     text: "Occupation distribution",
-                    color: "#fff",
+                    color: "#a5adba",
                     font: {
                       size: 20,
                     },
