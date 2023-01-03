@@ -229,7 +229,7 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
         <div className="col-span-2 flex items-center">
           <h2 className="text-5xl font-bold mr-auto">Order Stats</h2>
           <select
-            className="select select-bordered w-full max-w-xs"
+            className="select select-bordered select-accent w-full max-w-xs"
             defaultValue={select}
             onChange={(e) => {
               setselect(e.target.value);

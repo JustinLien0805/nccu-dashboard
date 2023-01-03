@@ -65,8 +65,8 @@ const Dashboard = ({ user, order }) => {
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:pt-20">
-        <h2 className="text-5xl font-bold col-span-3">User Stats</h2>
+      <div className="grid  grid-cols-2 gap-3 w-full p-4 lg:pt-20">
+        <h2 className="text-5xl font-bold col-span-2">User Stats</h2>
         <div className="stats shadow bg-primary text-white">
           <div className="stat">
             <div className="stat-title">Total User</div>
