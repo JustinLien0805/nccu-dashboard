@@ -12,7 +12,7 @@ model Dish {
   name        String   @db.VarChar(45)
   ingredients String   @db.VarChar(45)
   type        String   @db.VarChar(45)
-  image       String   @db.VarChar(45)
+  image       String   @db.VarChar(225)
   Order       Order[]
   Rating      Rating[]
 }
@@ -24,7 +24,7 @@ model Order {
   Dish           Dish   @relation(fields: [Dish_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_User_has_Dish_Dish1")
   User           User   @relation(fields: [User_studentId], references: [studentId], onDelete: NoAction, onUpdate: NoAction, map: "fk_User_has_Dish_User")
 
-  @@id([User_studentId, Dish_id])
+  @@id([User_studentId, Dish_id, date])
   @@index([Dish_id], map: "fk_User_has_Dish_Dish1_idx")
   @@index([User_studentId], map: "fk_User_has_Dish_User_idx")
 }

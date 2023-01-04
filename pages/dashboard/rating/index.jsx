@@ -145,10 +145,9 @@ export async function getServerSideProps() {
   const ratingForEachDish = await prisma.$queryRaw`SELECT d.name,
   CAST(SUM(CASE WHEN r.rating = 1 THEN 1 ELSE 0 END) as CHAR) as likes,
   CAST(SUM(CASE WHEN r.rating = 0 THEN 1 ELSE 0 END) as CHAR) as dislikes
-FROM railway.Rating r
-JOIN railway.Dish d ON r.Dish_id = d.id
-GROUP BY d.id;`;
-  console.log(ratingForEachDish);
+    FROM railway.Rating r
+    JOIN railway.Dish d ON r.Dish_id = d.id
+    GROUP BY d.id;`;
 
   return {
     props: {
