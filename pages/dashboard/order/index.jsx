@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { prisma } from "../../../lib/prisma";
 import { Line, Bar } from "react-chartjs-2";
 import {
@@ -23,6 +23,8 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+import { useTable } from "react-table";
+
 const Order = ({ orders, countsByDate, totalIncome }) => {
   const selectOptions = ["All Time", "Last 7 Day", "Last Month"];
   const [select, setselect] = useState(selectOptions[0]);
@@ -223,6 +225,36 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
     },
   };
 
+  // table config
+
+  const tableData = orders.map((order, index) => {
+    return {
+      id: index,
+      name: order.Dish.name,
+      date: order.date,
+    };
+  });
+
+  const columns = useMemo(() => {
+    return [
+      {
+        Header: "ID",
+        accessor: "id",
+      },
+      {
+        Header: "Name",
+        accessor: "name",
+      },
+      {
+        Header: "Date",
+        accessor: "date",
+      },
+    ];
+  }, []);
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data: tableData });
+
   return (
     <>
       <div className="grid  grid-cols-2 gap-3 w-full p-4 lg:pt-20">
@@ -260,6 +292,44 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
       <div className="p-4">
         <div className="flex justify-start flex-col items-start">
           <div className="md:w-[60vw] w-[80vw] h-[50vh] my-16">
+            <h2 className="text-5xl font-bold mb-4">Order List</h2>
+            <table {...getTableProps()} className="border-2 w-full">
+              <thead>
+                {headerGroups.map((headerGroup) => (
+                  <tr {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column) => (
+                      <th
+                        {...column.getHeaderProps()}
+                        className="border-b-2 border-r-2"
+                      >
+                        {column.render("Header")}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody {...getTableBodyProps()}>
+                {rows.map((row) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => {
+                        return (
+                          <td
+                            {...cell.getCellProps()}
+                            className="border-b-2 border-r-2 text-center"
+                          >
+                            {cell.render("Cell")}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="md:w-[60vw] w-[80vw] h-[50vh] my-16">
             <div className="flex items-center mb-4">
               <h3 className="font-bold text-3xl mr-auto">Order Count</h3>
             </div>
@@ -280,7 +350,21 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
 export default Order;
 
 export async function getServerSideProps() {
-  const orders = await prisma.order.findMany();
+  // get all orders and the dish name
+  const orders = await prisma.order.findMany({
+    select: {
+      date: true,
+      Dish_id: true,
+      Dish: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      date: "desc",
+    },
+  });
   // group the order by date and count the number of order
   const result = await prisma.order.findMany({
     select: {
