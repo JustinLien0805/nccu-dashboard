@@ -26,7 +26,7 @@ ChartJS.register(
 import { useTable } from "react-table";
 
 const Order = ({ orders, countsByDate, totalIncome }) => {
-  const selectOptions = ["All Time", "Last 7 Day", "Last Month"];
+  const selectOptions = ["Today", "All Time", "Last 7 Day", "Last Month"];
   const [select, setselect] = useState(selectOptions[0]);
 
   const [ordersState, setOrdersState] = useState(orders);
@@ -70,6 +70,24 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
 
   // when select option change, update the data
   useEffect(() => {
+    if (select === "Today") {
+      const today = new Date();
+      const todayOrders = orders.filter((order) => {
+        const orderDate = new Date(order.date);
+        return orderDate.getDate() === today.getDate();
+      });
+      const todayCounts = Object.keys(countsByDate).filter((date) => {
+        const orderDate = new Date(date);
+        return orderDate.getDate() === today.getDate();
+      });
+
+      const todayCountsObj = {};
+      todayCounts.forEach((date) => {
+        todayCountsObj[date] = countsByDateState[date];
+      });
+      setCountsByDateState(todayCountsObj);
+      setOrdersState(todayOrders);
+    }
     if (select === "All Time") {
       setCountsByDateState(countsByDate);
       setOrdersState(orders);
@@ -227,13 +245,15 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
 
   // table config
 
-  const tableData = orders.map((order, index) => {
-    return {
-      id: index,
-      name: order.Dish.name,
-      date: order.date,
-    };
-  });
+  const tableData = useMemo(() => {
+    return ordersState.map((order, index) => {
+      return {
+        id: index,
+        name: order.Dish.name,
+        date: order.date,
+      };
+    });
+  }, [ordersState]);
 
   const columns = useMemo(() => {
     return [
@@ -291,7 +311,7 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
       </div>
       <div className="p-4">
         <div className="flex justify-start flex-col items-start">
-          <div className="md:w-[60vw] w-[80vw] h-[50vh] my-16">
+          <div className="w-full h-[50vh] my-16">
             <h2 className="text-5xl font-bold mb-4">Order List</h2>
             <table {...getTableProps()} className="border-2 w-full">
               <thead>
