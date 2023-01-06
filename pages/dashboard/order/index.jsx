@@ -26,7 +26,7 @@ ChartJS.register(
 import { useTable } from "react-table";
 
 const Order = ({ orders, countsByDate, totalIncome }) => {
-  const selectOptions = ["Today", "All Time", "Last 7 Day", "Last Month"];
+  const selectOptions = ["Tomorrow", "All Time", "Last 7 Day", "Last Month"];
   const [select, setselect] = useState(selectOptions[0]);
 
   const [ordersState, setOrdersState] = useState(orders);
@@ -70,23 +70,26 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
 
   // when select option change, update the data
   useEffect(() => {
-    if (select === "Today") {
+    if (select === "Tomorrow") {
       const today = new Date();
-      const todayOrders = orders.filter((order) => {
+      // get date of tomorrow
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const tomorrowOrders = orders.filter((order) => {
         const orderDate = new Date(order.date);
-        return orderDate.getDate() === today.getDate();
+        return orderDate.getDate() === tomorrow.getDate();
       });
-      const todayCounts = Object.keys(countsByDate).filter((date) => {
+      const tomorrowCounts = Object.keys(countsByDate).filter((date) => {
         const orderDate = new Date(date);
-        return orderDate.getDate() === today.getDate();
+        return orderDate.getDate() === tomorrow.getDate();
       });
 
-      const todayCountsObj = {};
-      todayCounts.forEach((date) => {
-        todayCountsObj[date] = countsByDateState[date];
+      const tomorrowCountsObj = {};
+      tomorrowCounts.forEach((date) => {
+        tomorrowCountsObj[date] = countsByDateState[date];
       });
-      setCountsByDateState(todayCountsObj);
-      setOrdersState(todayOrders);
+      setCountsByDateState(tomorrowCountsObj);
+      setOrdersState(tomorrowOrders);
     }
     if (select === "All Time") {
       setCountsByDateState(countsByDate);
@@ -160,16 +163,6 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    // plugins: {
-    //   title: {
-    //     display: true,
-    //     text: "Order per Day",
-    //     color: "#a5adba",
-    //     font: {
-    //       size: 20,
-    //     },
-    //   },
-    // },
     scales: {
       y: {
         // not 'yAxes: [{' anymore (not an array anymore)
@@ -212,14 +205,6 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
       legend: {
         position: "top",
       },
-      // title: {
-      //   display: true,
-      //   text: "Plans distribution",
-      //   color: "#a5adba",
-      //   font: {
-      //     size: 20,
-      //   },
-      // },
       labels: {
         color: "#a5adba",
       },
@@ -246,9 +231,9 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
   // table config
 
   const tableData = useMemo(() => {
-    return ordersState.map((order, index) => {
+    return ordersState.map((order) => {
       return {
-        id: index,
+        id: order.User.studentId,
         name: order.Dish.name,
         date: order.date,
       };
@@ -258,7 +243,7 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
   const columns = useMemo(() => {
     return [
       {
-        Header: "ID",
+        Header: "Student ID",
         accessor: "id",
       },
       {
@@ -311,7 +296,7 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
       </div>
       <div className="p-4">
         <div className="flex justify-start flex-col items-start">
-          <div className="w-full h-[50vh] my-16">
+          <div className="w-full my-16">
             <h2 className="text-5xl font-bold mb-4">Order List</h2>
             <table {...getTableProps()} className="border-2 w-full">
               <thead>
@@ -344,7 +329,7 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
                             {cell.render("Cell")}
                           </td>
                         );
-                      })}
+                      })}                      
                     </tr>
                   );
                 })}
@@ -380,6 +365,11 @@ export async function getServerSideProps() {
       Dish: {
         select: {
           name: true,
+        },
+      },
+      User: {
+        select: {
+          studentId: true,
         },
       },
     },
