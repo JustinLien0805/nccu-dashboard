@@ -298,43 +298,45 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
         <div className="flex justify-start flex-col items-start">
           <div className="w-full my-16">
             <h2 className="text-5xl font-bold mb-4">Order List</h2>
-            <table {...getTableProps()} className="border-2 w-full">
-              <thead>
-                {headerGroups.map((headerGroup, index) => (
-                  <tr key={index} {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column, index) => (
-                      <th
-                        {...column.getHeaderProps()}
-                        className="border-b-2 border-r-2"
-                        key={index}
-                      >
-                        {column.render("Header")}
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map((row, index) => {
-                  prepareRow(row);
-                  return (
-                    <tr {...row.getRowProps()} key={index}>
-                      {row.cells.map((cell, index) => {
-                        return (
-                          <td
-                            {...cell.getCellProps()}
-                            className="border-b-2 border-r-2 text-center"
-                            key={index}
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        );
-                      })}
+            <div className="w-full h-96 overflow-y-scroll">
+              <table {...getTableProps()} className="border-2 w-full">
+                <thead>
+                  {headerGroups.map((headerGroup, index) => (
+                    <tr key={index} {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map((column, index) => (
+                        <th
+                          {...column.getHeaderProps()}
+                          className="border-b-2 border-r-2"
+                          key={index}
+                        >
+                          {column.render("Header")}
+                        </th>
+                      ))}
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                  ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                  {rows.map((row, index) => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()} key={index}>
+                        {row.cells.map((cell, index) => {
+                          return (
+                            <td
+                              {...cell.getCellProps()}
+                              className="border-b-2 border-r-2 text-center"
+                              key={index}
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
           <div className="md:w-[60vw] w-[80vw] h-[50vh] my-16">
             <div className="flex items-center mb-4">
