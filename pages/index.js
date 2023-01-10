@@ -27,10 +27,10 @@ export default function Home() {
           // store jwt token in local storage
           localStorage.setItem("token", res.data.token);
           router.push("/dashboard");
-          setLoading(false);
+          // setLoading(false);
         } else {
           setError(res.data.error);
-          setLoading(false);
+          // setLoading(false);
         }
       } catch (err) {
         console.log(err);
