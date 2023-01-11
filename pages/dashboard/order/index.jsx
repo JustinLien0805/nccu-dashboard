@@ -298,7 +298,7 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
         <div className="flex justify-start flex-col items-start">
           <div className="w-full my-16">
             <h2 className="text-5xl font-bold mb-4">Order List</h2>
-            <div className="w-full h-96 overflow-y-scroll">
+            <div className="w-full max-h-96 overflow-y-scroll">
               <table {...getTableProps()} className="border-2 w-full">
                 <thead>
                   {headerGroups.map((headerGroup, index) => (
