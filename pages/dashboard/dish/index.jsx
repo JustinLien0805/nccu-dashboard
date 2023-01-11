@@ -125,6 +125,13 @@ export async function getServerSideProps() {
   const records =
     await prisma.$queryRaw`SELECT d.name, CAST(COUNT(*) as CHAR) as num_orders FROM railway.Order o JOIN railway.Dish d ON o.Dish_id = d.id GROUP BY o.Dish_id ORDER BY num_orders DESC;`;
 
+  // change num_orders to int
+  records.forEach((record) => {
+    record.num_orders = parseInt(record.num_orders);
+  });
+  // order the records by num_orders
+  records.sort((a, b) => b.num_orders - a.num_orders);
+  // get top 3
   const top3 = records.slice(0, 3);
   return {
     props: {
