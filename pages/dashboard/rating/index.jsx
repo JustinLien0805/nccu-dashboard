@@ -89,7 +89,7 @@ const Rating = ({ ratingForEachDish, likesCount, dislikesCount }) => {
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:py-20">
+      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:py-20 lg:mt-0 mt-16">
         <h2 className="text-5xl font-bold col-span-2 lg:col-span-3">
           Rating Stats
         </h2>

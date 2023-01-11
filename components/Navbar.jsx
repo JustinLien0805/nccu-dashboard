@@ -23,7 +23,7 @@ const Navbar = ({ children }) => {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* <!-- Page content here --> */}
-          <div className="w-full navbar bg-base-300 lg:hidden fixed">
+          <div className="w-full navbar bg-base-300 lg:hidden fixed z-50">
             <div className="flex-none">
               <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost">
                 <svg

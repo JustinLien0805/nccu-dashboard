@@ -65,7 +65,7 @@ const Dashboard = ({ user, order }) => {
 
   return (
     <>
-      <div className="grid  grid-cols-2 gap-3 w-full p-4 lg:pt-20">
+      <div className="grid grid-cols-2 gap-3 w-full p-4 lg:pt-20 lg:mt-0 mt-16">
         <h2 className="text-5xl font-bold col-span-2">User Stats</h2>
         <div className="stats shadow bg-primary text-white">
           <div className="stat">
@@ -84,14 +84,13 @@ const Dashboard = ({ user, order }) => {
       </div>
       <div className="p-4">
         <div className="grid lg:grid-cols-2 gap-4 w-full">
-          <div>
+          <div className="max-w-screen">
             <Pie
               data={data}
               height="350px"
               width="350px"
               options={{
                 maintainAspectRatio: false,
-
                 plugins: {
                   title: {
                     display: true,
@@ -112,7 +111,6 @@ const Dashboard = ({ user, order }) => {
               width="350px"
               options={{
                 maintainAspectRatio: false,
-
                 plugins: {
                   title: {
                     display: true,

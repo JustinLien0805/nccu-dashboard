@@ -262,7 +262,7 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
 
   return (
     <>
-      <div className="grid  grid-cols-2 gap-3 w-full p-4 lg:pt-20">
+      <div className="grid grid-cols-2 gap-3 w-full p-4 lg:pt-20 lg:mt-0 mt-16">
         <div className="col-span-2 flex items-center">
           <h2 className="text-5xl font-bold mr-auto">Order Stats</h2>
           <select

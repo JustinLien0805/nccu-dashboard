@@ -11,7 +11,6 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -80,11 +79,8 @@ const Dish = ({ top3, records }) => {
   };
   return (
     <>
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:py-20">
+      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:py-20 lg:mt-0 mt-16">
         <h2 className="text-5xl font-bold col-span-2 lg:col-span-3">
-          Dish Stats
-        </h2>
-        <h2 className="text-3xl font-bold col-span-2 lg:col-span-3">
           Top Sellers
         </h2>
         <div className="stats shadow bg-primary text-white">
