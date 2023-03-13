@@ -79,29 +79,29 @@ const Dish = ({ top3, records }) => {
   };
   return (
     <>
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-3 w-full p-4 lg:py-20 lg:mt-0 mt-16">
-        <h2 className="text-5xl font-bold col-span-2 lg:col-span-3">
+      <div className="mt-16 grid w-full grid-cols-2 gap-3 p-4 lg:mt-0 lg:grid-cols-3 lg:py-20">
+        <h2 className="col-span-2 text-5xl font-bold lg:col-span-3">
           Top Sellers
         </h2>
-        <div className="stats shadow bg-primary text-white">
+        <div className="stats bg-primary text-white shadow">
           <div className="stat">
-            <div className="stat-title font-bold text-xl">1st</div>
+            <div className="stat-title text-xl font-bold">1st</div>
             <div className="stat-value">{top3[0].name}</div>
             <div className="stat-desc">21% more than last month</div>
           </div>
         </div>
 
-        <div className="stats shadow bg-primary text-white">
+        <div className="stats bg-primary text-white shadow">
           <div className="stat">
-            <div className="stat-title font-bold text-xl">2nd</div>
+            <div className="stat-title text-xl font-bold">2nd</div>
             <div className="stat-value"> {top3[1].name}</div>
             <div className="stat-desc">21% more than last month</div>
           </div>
         </div>
 
-        <div className="stats shadow bg-primary text-white">
+        <div className="stats bg-primary text-white shadow">
           <div className="stat">
-            <div className="stat-title font-bold text-xl">3rd</div>
+            <div className="stat-title text-xl font-bold">3rd</div>
             <div className="stat-value">{top3[2].name}</div>
             <div className="stat-desc">21% more than last month</div>
           </div>
@@ -109,7 +109,7 @@ const Dish = ({ top3, records }) => {
       </div>
       <div className="p-4">
         <div className="flex justify-center">
-          <div className="md:w-[70vw] w-[80vw] h-[50vh]">
+          <div className="h-[50vh] w-[80vw] md:w-[70vw]">
             <Bar data={data} options={options} />
           </div>
         </div>

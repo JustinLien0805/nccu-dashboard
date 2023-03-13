@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <>
       {/* <Navbar /> */}
-      <div className="flex flex-col min-h-screen justify-center items-center space-y-4 relative">
+      <div className="relative flex min-h-screen flex-col items-center justify-center space-y-4">
         {loading && <Loader />}
         <Head>
           <title>NCCU Dashboard</title>
@@ -53,7 +53,7 @@ export default function Home() {
         <h1 className="text-5xl font-bold">Dashboard</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col justify-center items-center space-y-6 w-2/3"
+          className="flex w-2/3 flex-col items-center justify-center space-y-6"
         >
           <div className="form-control w-full max-w-md">
             <label className="label">
@@ -62,12 +62,12 @@ export default function Home() {
             <input
               type="text"
               placeholder="Sutdent ID"
-              className="input input-bordered w-full"
+              className="input-bordered input w-full"
               {...register("studentId", { required: true })}
             />
             {errors.studentId && (
               <label className="label">
-                <span className="label-text-alt text-red-500 w-full text-right">
+                <span className="label-text-alt w-full text-right text-red-500">
                   this field is required
                 </span>
               </label>
@@ -81,12 +81,12 @@ export default function Home() {
             <input
               type="text"
               placeholder="Sutdent ID"
-              className="input input-bordered w-full"
+              className="input-bordered input w-full"
               {...register("password", { required: true })}
             />
             {errors.password && (
               <label className="label">
-                <span className="label-text-alt text-red-500 w-full text-right">
+                <span className="label-text-alt w-full text-right text-red-500">
                   this field is required
                 </span>
               </label>
@@ -95,7 +95,7 @@ export default function Home() {
 
           {error && <p className="text-red-500">{error}</p>}
 
-          <div className="flex flex-col w-full border-opacity-50 max-w-md items-center justify-center">
+          <div className="flex w-full max-w-md flex-col items-center justify-center border-opacity-50">
             <button className="btn w-full max-w-md" type="submit">
               Sign In
             </button>

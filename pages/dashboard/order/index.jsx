@@ -262,11 +262,11 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 w-full p-4 lg:pt-20 lg:mt-0 mt-16">
+      <div className="mt-16 grid w-full grid-cols-2 gap-3 p-4 lg:mt-0 lg:pt-20">
         <div className="col-span-2 flex items-center">
-          <h2 className="text-5xl font-bold mr-auto">Order Stats</h2>
+          <h2 className="mr-auto text-5xl font-bold">Order Stats</h2>
           <select
-            className="select select-bordered select-accent max-w-md"
+            className="select-bordered select-accent select max-w-md"
             defaultValue={select}
             onChange={(e) => {
               setselect(e.target.value);
@@ -279,14 +279,14 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
             ))}
           </select>
         </div>
-        <div className="stats shadow bg-primary text-white">
+        <div className="stats bg-primary text-white shadow">
           <div className="stat">
             <div className="stat-title">Total Order</div>
             <div className="stat-value">{ordersState.length}</div>
             <div className="stat-desc">21% more than last month</div>
           </div>
         </div>
-        <div className="stats shadow bg-primary text-white">
+        <div className="stats bg-primary text-white shadow">
           <div className="stat">
             <div className="stat-title">Total Revenue</div>
             <div className="stat-value">${newIncome}</div>
@@ -295,11 +295,11 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
         </div>
       </div>
       <div className="p-4">
-        <div className="flex justify-start flex-col items-start">
-          <div className="w-full my-16">
-            <h2 className="text-5xl font-bold mb-4">Order List</h2>
-            <div className="w-full max-h-96 overflow-y-scroll">
-              <table {...getTableProps()} className="border-2 w-full">
+        <div className="flex flex-col items-start justify-start">
+          <div className="my-16 w-full">
+            <h2 className="mb-4 text-5xl font-bold">Order List</h2>
+            <div className="max-h-96 w-full overflow-y-scroll">
+              <table {...getTableProps()} className="w-full border-2">
                 <thead>
                   {headerGroups.map((headerGroup, index) => (
                     <tr key={index} {...headerGroup.getHeaderGroupProps()}>
@@ -338,15 +338,15 @@ const Order = ({ orders, countsByDate, totalIncome }) => {
               </table>
             </div>
           </div>
-          <div className="md:w-[60vw] w-[80vw] h-[50vh] my-16">
-            <div className="flex items-center mb-4">
-              <h3 className="font-bold text-3xl mr-auto">Order Count</h3>
+          <div className="my-16 h-[50vh] w-[80vw] md:w-[60vw]">
+            <div className="mb-4 flex items-center">
+              <h3 className="mr-auto text-3xl font-bold">Order Count</h3>
             </div>
             <Line data={data} options={options} />
           </div>
-          <div className="md:w-[60vw] w-[80vw] h-[50vh] my-16">
-            <div className="flex items-center mb-4">
-              <h3 className="font-bold text-3xl mr-auto">Plan Distribution</h3>
+          <div className="my-16 h-[50vh] w-[80vw] md:w-[60vw]">
+            <div className="mb-4 flex items-center">
+              <h3 className="mr-auto text-3xl font-bold">Plan Distribution</h3>
             </div>
             <Bar data={data2} options={options2} />
           </div>
