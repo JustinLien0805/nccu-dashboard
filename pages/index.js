@@ -57,7 +57,7 @@ export default function Home() {
         >
           <div className="form-control w-full max-w-md">
             <label className="label">
-              <span className="label-text">Student ID</span>
+              <span className="label-text">Student ID (Demo ID: 1)</span>
             </label>
             <input
               type="text"
@@ -76,11 +76,11 @@ export default function Home() {
 
           <div className="form-control w-full max-w-md">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text">Password (Demo password: 1)</span>
             </label>
             <input
               type="text"
-              placeholder="Sutdent ID"
+              placeholder="password"
               className="input-bordered input w-full"
               {...register("password", { required: true })}
             />
@@ -92,7 +92,6 @@ export default function Home() {
               </label>
             )}
           </div>
-
           {error && <p className="text-red-500">{error}</p>}
 
           <div className="flex w-full max-w-md flex-col items-center justify-center border-opacity-50">
